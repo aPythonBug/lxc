@@ -1,13 +1,20 @@
 # Install lxc on ubuntu 16.04
 
-    $ sudo sh -c "apt update && apt upgrade -y"  - Fetches the list of available updates and strictly upgrades the current packages
-    $ sudo apt install -y lxd zfsutils-linux     - Install lxc/lxd and fzsutils-linux packages
+    $ sudo sh -c "apt update && apt upgrade -y"  
+    
+    - Fetches the list of available updates and strictly upgrades the current packages
+    
+    $ sudo apt install -y lxd zfsutils-linux     
+    
+    - Install lxc/lxd and fzsutils-linux packages
 
-# add user to the LXD group for management purpose
+Add user to the LXD group for management purpose
+
     $ sudo adduser {yourUserName} lxd
     $ newgrp lxd
 
-# Configure LXD storage and networking option
+Configure LXD storage and networking option
+    
     $ sudo lxd init
     
 # Creating your first Linux container
@@ -39,6 +46,21 @@ c) List the existing containers:
     $ lxc list "*c1*"
     $ lxc list "*c2*"
     $ lxc list
+    
+    
+    To run or execute commands in containers use exec command:
+
+    lxc exec containerName -- command
+    lxc exec containerName -- /path/to/script
+    lxc exec containerName --env EDITOR=/usr/bin/vim -- command
+
+    - run date, ip a, ip rm and other commands on various containers
+
+    $ lxc exec cenots-c2 -- date
+    $ lxc exec cenots-c2 -- ip a
+    $ lxc exec ubuntu-nginx-c3 -- ip r
+    $ lxc exec fedora28-c7-- dnf update
+    $ lxc exec debian9-c4 -- cat /etc/debian_version 
     
 d) To gain login and gain shell access in a container named file-server , enter:
 
